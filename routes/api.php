@@ -1,27 +1,32 @@
 <?php
 
 use App\Http\Controllers\NoteController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
+use Illuminate\Support\Facades\Route;
+
 
 Route::get('/notes', [NoteController::class, 'index']);
-
 Route::get('/notes/{id}', [NoteController::class, 'show']);
-
 Route::post('/notes', [NoteController::class, 'store']);
-
 Route::put('/notes/{id}', [NoteController::class, 'update']);
-
 Route::delete('/notes/{id}', [NoteController::class, 'destroy']);
 
 Route::get('/categories', [CategoryController::class, 'index']);
-
 Route::get('/categories/{id}', [CategoryController::class, 'show']);
-
 Route::post('/categories', [CategoryController::class, 'store']);
-
 Route::put('/categories/{id}', [CategoryController::class, 'update']);
-
 Route::delete('/categories/{id}', [CategoryController::class, 'destroy']);
 
+
 Route::get('/categories/{id}/notes', [NoteController::class, 'notesByCategory']);
+
+
+Route::patch('/notes/{id}/pin', [NoteController::class, 'pin']);
+Route::patch('/notes/{id}/unpin', [NoteController::class, 'unpin']);
+Route::patch('/notes/{id}/publish', [NoteController::class, 'publish']);
+Route::patch('/notes/{id}/archive', [NoteController::class, 'archive']);
+
+
+Route::get('/notes/stats', [NoteController::class, 'statsByStatus']);
+Route::patch('/notes/archive-old', [NoteController::class, 'archiveOldDrafts']);
+Route::get('/users/{userId}/notes-with-categories', [NoteController::class, 'userNotesWithCategories']);

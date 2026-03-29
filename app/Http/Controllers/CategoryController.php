@@ -2,42 +2,37 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
 
     public function index()
     {
-        $categories = DB::table('categories')
-            ->orderBy('created_at', 'desc')
-            ->get();
-
         return response()->json([
-            'categories' => $categories
+            'categories' => Category::latest()
         ], Response::HTTP_OK);
     }
 
+
     public function store(Request $request)
     {
-        DB::table('categories')->insert([
+        $category = Category::create([
             'name' => $request->name,
-            'created_at' => now(),
-            'updated_at' => now()
+            'color' => $request->color,
         ]);
 
         return response()->json([
-            'message' => 'Kategória bola vytvorená.'
+            'message' => 'Kategória bola vytvorená.',
+            'category' => $category
         ], Response::HTTP_CREATED);
     }
 
     public function show(string $id)
     {
-        $category = DB::table('categories')
-            ->where('id', $id)
-            ->first();
+        $category = Category::find($id);
 
         if (!$category) {
             return response()->json([
@@ -50,9 +45,10 @@ class CategoryController extends Controller
         ], Response::HTTP_OK);
     }
 
+
     public function update(Request $request, string $id)
     {
-        $category = DB::table('categories')->where('id', $id)->first();
+        $category = Category::find($id);
 
         if (!$category) {
             return response()->json([
@@ -60,21 +56,21 @@ class CategoryController extends Controller
             ], Response::HTTP_NOT_FOUND);
         }
 
-        DB::table('categories')
-            ->where('id', $id)
-            ->update([
-                'name' => $request->name,
-                'updated_at' => now()
-            ]);
+        $category->update([
+            'name' => $request->name,
+            'color' => $request->color,
+        ]);
 
         return response()->json([
-            'message' => 'Kategória bola aktualizovaná.'
+            'message' => 'Kategória bola aktualizovaná.',
+            'category' => $category
         ], Response::HTTP_OK);
     }
 
+
     public function destroy(string $id)
     {
-        $category = DB::table('categories')->where('id', $id)->first();
+        $category = Category::find($id);
 
         if (!$category) {
             return response()->json([
@@ -82,11 +78,10 @@ class CategoryController extends Controller
             ], Response::HTTP_NOT_FOUND);
         }
 
-        DB::table('categories')->where('id', $id)->delete();
+        $category->delete();
 
         return response()->json([
             'message' => 'Kategória bola odstránená.'
         ], Response::HTTP_OK);
     }
-
 }
