@@ -3,6 +3,7 @@
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TaskController;
 
 
 Route::get('/notes', [NoteController::class, 'index']);
@@ -30,3 +31,11 @@ Route::patch('/notes/{id}/archive', [NoteController::class, 'archive']);
 Route::get('/notes/stats', [NoteController::class, 'statsByStatus']);
 Route::patch('/notes/archive-old', [NoteController::class, 'archiveOldDrafts']);
 Route::get('/users/{userId}/notes-with-categories', [NoteController::class, 'userNotesWithCategories']);
+
+Route::prefix('notes/{note}')->group(function () {
+    Route::get('tasks', [TaskController::class, 'index']);
+    Route::get('tasks/{task}', [TaskController::class, 'show']);
+    Route::post('tasks', [TaskController::class, 'store']);
+    Route::put('tasks/{task}', [TaskController::class, 'update']);
+    Route::delete('tasks/{task}', [TaskController::class, 'destroy']);
+});

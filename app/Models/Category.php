@@ -10,16 +10,12 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'name',
-        'color',
-    ];
+    protected $fillable = ['name', 'color'];
 
     public function notes(): BelongsToMany
     {
         return $this->belongsToMany(Note::class, 'note_category')->withTimestamps();
     }
-
 
     public static function latest()
     {

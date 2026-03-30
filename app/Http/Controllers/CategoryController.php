@@ -5,27 +5,29 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Validation\Rule;
 
 class CategoryController extends Controller
 {
-
     public function index()
     {
+        $categories = Category::latest();
         return response()->json([
-            'categories' => Category::latest()
+            'categories' => $categories
         ], Response::HTTP_OK);
     }
 
-
     public function store(Request $request)
     {
-        $category = Category::create([
-            'name' => $request->name,
-            'color' => $request->color,
+        $validated = $request->validate([
+            'name'  => ['required', 'string', 'max:255', 'unique:categories,name'],
+            'color' => ['required', 'string', 'regex:/^#[0-9A-Fa-f]{6}$/'],
         ]);
 
+        $category = Category::create($validated);
+
         return response()->json([
-            'message' => 'Kategória bola vytvorená.',
+            'message'  => 'Kategória bola vytvorená.',
             'category' => $category
         ], Response::HTTP_CREATED);
     }
@@ -45,7 +47,6 @@ class CategoryController extends Controller
         ], Response::HTTP_OK);
     }
 
-
     public function update(Request $request, string $id)
     {
         $category = Category::find($id);
@@ -56,17 +57,23 @@ class CategoryController extends Controller
             ], Response::HTTP_NOT_FOUND);
         }
 
-        $category->update([
-            'name' => $request->name,
-            'color' => $request->color,
+        $validated = $request->validate([
+            'name'  => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('categories')->ignore($category->id),
+            ],
+            'color' => ['required', 'string', 'regex:/^#[0-9A-Fa-f]{6}$/'],
         ]);
 
+        $category->update($validated);
+
         return response()->json([
-            'message' => 'Kategória bola aktualizovaná.',
+            'message'  => 'Kategória bola aktualizovaná.',
             'category' => $category
         ], Response::HTTP_OK);
     }
-
 
     public function destroy(string $id)
     {
