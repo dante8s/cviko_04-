@@ -1,3 +1,15 @@
+Cvicenie_7
+Prosím, skontrolujte úlohy 5 a 6. Obávam sa, že mám málo bodov z domácich úloh.
+
+<img width="1224" height="1158" alt="Знімок екрана 2026-04-04 225034" src="https://github.com/user-attachments/assets/a70d4737-37a3-4956-bcad-8e89060f2199" />
+
+<img width="1192" height="1084" alt="Знімок екрана 2026-04-04 225519" src="https://github.com/user-attachments/assets/b625c543-4d4e-41ec-bf31-4d733adedf97" />
+
+<img width="1130" height="1220" alt="Знімок екрана 2026-04-04 225654" src="https://github.com/user-attachments/assets/f7c54fe2-8550-4d94-9eba-dc182cea5667" />
+
+<img width="1107" height="1106" alt="Знімок екрана 2026-04-04 225743" src="https://github.com/user-attachments/assets/3e9681d8-7f7c-47d6-8814-eac39e6e07a0" />
+
+
 cviko_6
 1 
 <img width="1191" height="1429" alt="Знімок екрана 2026-03-30 021442" src="https://github.com/user-attachments/assets/aa4d31c6-f687-46ea-9605-013385edf0b1" />
