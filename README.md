@@ -1,3 +1,9 @@
+Cvicenie_8
+<img width="1149" height="1363" alt="Знімок екрана 2026-04-19 002656" src="https://github.com/user-attachments/assets/64b8fb73-8a1c-42b7-873f-e4781097ab2f" />
+
+
+<img width="1118" height="1044" alt="Знімок екрана 2026-04-19 003345" src="https://github.com/user-attachments/assets/7be48d19-e918-4b06-9a7b-21ab37fd604d" />
+
 Cvicenie_7
 Prosím, skontrolujte úlohy 5 a 6. Obávam sa, že mám málo bodov z domácich úloh.
 
