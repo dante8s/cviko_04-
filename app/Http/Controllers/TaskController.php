@@ -10,13 +10,18 @@ use Illuminate\Http\Response;
 class TaskController extends Controller
 {
     public function index(Note $note)
+
     {
+        $this->authorize('view', [Task::class, $note]);
+
         $tasks = $note->tasks()->get();
         return response()->json(['tasks' => $tasks], Response::HTTP_OK);
     }
 
     public function store(Request $request, Note $note)
+
     {
+        $this->authorize('create', [Task::class, $note]);
         $validated = $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'is_done' => ['sometimes', 'boolean'],
@@ -33,6 +38,8 @@ class TaskController extends Controller
 
     public function show(Note $note, Task $task)
     {
+        $this->authorize('view', $task);
+
         if ($task->note_id !== $note->id) {
             return response()->json(['message' => 'Úloha nenájdená pre túto poznámku.'], Response::HTTP_NOT_FOUND);
         }
@@ -42,6 +49,8 @@ class TaskController extends Controller
 
     public function update(Request $request, Note $note, Task $task)
     {
+        $this->authorize('update', $task);
+
         if ($task->note_id !== $note->id) {
             return response()->json(['message' => 'Úloha nenájdená pre túto poznámku.'], Response::HTTP_NOT_FOUND);
         }
@@ -62,6 +71,8 @@ class TaskController extends Controller
 
     public function destroy(Note $note, Task $task)
     {
+        $this->authorize('delete', $task);
+
         if ($task->note_id !== $note->id) {
             return response()->json(['message' => 'Úloha nenájdená pre túto poznámku.'], Response::HTTP_NOT_FOUND);
         }

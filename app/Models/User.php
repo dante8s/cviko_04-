@@ -49,4 +49,14 @@ class User extends Authenticatable
         return $this->premium_until !== null && $this->premium_until->isFuture();
     }
 
+    public function profilePhoto(): \Illuminate\Database\Eloquent\Relations\MorphOne
+    {
+        return $this->morphOne(Attachment::class, 'attachable')
+            ->where('collection', 'profile_photo');
+    }
+    public function notes(): HasMany
+    {
+        return $this->hasMany(Note::class);
+    }
+
 }

@@ -121,4 +121,9 @@ class Note extends Model
             ->orderByDesc('updated_at')
             ->get(['id', 'title']);
     }
+    public function attachments(): MorphMany
+    {
+        return $this->morphMany(Attachment::class, 'attachable')
+            ->where('collection', 'attachment');
+    }
 }
